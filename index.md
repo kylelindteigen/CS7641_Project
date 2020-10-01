@@ -30,12 +30,12 @@ This project has a number of potential difficulties the first of which would be 
 
 ## References:
 
-(https://towardsdatascience.com/machine-learning-for-sports-betting-not-a-basic-classification-problem-b42ae4900782)
+[https://towardsdatascience.com/machine-learning-for-sports-betting-not-a-basic-classification-problem-b42ae4900782](https://towardsdatascience.com/machine-learning-for-sports-betting-not-a-basic-classification-problem-b42ae4900782)
 
-(https://www.nbastuffer.com/analytics101/machine-learning-systems-in-sports/)
+[https://www.nbastuffer.com/analytics101/machine-learning-systems-in-sports/](https://www.nbastuffer.com/analytics101/machine-learning-systems-in-sports/)
 
-(https://blog.oursky.com/2019/11/26/machine-learning-applications-nba-predictions/)
+[https://blog.oursky.com/2019/11/26/machine-learning-applications-nba-predictions/](https://blog.oursky.com/2019/11/26/machine-learning-applications-nba-predictions/)
 
-(https://towardsdatascience.com/building-my-first-machine-learning-model-nba-prediction-algorithm-dee5c5bc4cc1)
+[https://towardsdatascience.com/building-my-first-machine-learning-model-nba-prediction-algorithm-dee5c5bc4cc1](https://towardsdatascience.com/building-my-first-machine-learning-model-nba-prediction-algorithm-dee5c5bc4cc1)
 
-(https://towardsdatascience.com/predict-nba-games-make-money-machine-learning-project-b222b33f70a3)
+[https://towardsdatascience.com/predict-nba-games-make-money-machine-learning-project-b222b33f70a3](https://towardsdatascience.com/predict-nba-games-make-money-machine-learning-project-b222b33f70a3)
