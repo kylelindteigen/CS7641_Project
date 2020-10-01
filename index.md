@@ -1,3 +1,6 @@
+layout: page
+title: Blah
+
 ##Introduction/Background
 
 A couple of our team members are fans of the NBA and are interested in the idea of sports analytics. We as a group also wanted to create something that could potentially financially benefit us and from the combination of those two came our idea to look into different ways of beating the betting odds for NBA games.
