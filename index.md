@@ -1,6 +1,3 @@
-layout: page
-title: NBA Beating the Spread
-
 #### By: Alec Domotor, Kyrylo Kobzyev, Kyle Lindteigen, Yogesh Raparia, Jaya Sai Veepuru
 
 ## Introduction/Background
