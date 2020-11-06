@@ -1,4 +1,4 @@
-#### By: Alec Domotor, Kyrylo Kobzyev, Kyle Lindteigen, Yogesh Raparia, Jaya Sai Veepuru
+#### By: Alec Domotor, Kyle Lindteigen, Yogesh Raparia, Jaya Sai Veepuru
 
 ## Introduction/Background
 
