@@ -55,11 +55,11 @@ Hubáček, Ondřej & Sourek, Gustav & Železný, Filip. (2019). Exploiting sport
 James. "Clustering NBA Playstyles Using Machine Learning" Medium, Towards Data Science, 26 Oct. 2019,
 [https://towardsdatascience.com/clustering-nba-playstyles-using-machine-learning-8c7e8e23c90c](https://towardsdatascience.com/clustering-nba-playstyles-using-machine-learning-8c7e8e23c90c).
 
-Basketball Statistics and History. (n.d.). Retrieved November 06, 2020, from https://www.basketball-reference.com/
+Basketball Statistics and History. (n.d.). Retrieved November 06, 2020, from [https://www.basketball-reference.com/](https://www.basketball-reference.com/).
 
-GoldSheet. (n.d.). Retrieved November 06, 2020, from http://www.goldsheet.com/histnba.php
+GoldSheet. (n.d.). Retrieved November 06, 2020, from [http://www.goldsheet.com/histnba.php](http://www.goldsheet.com/histnba.php).
 
-SPORTSBOOK REVIEWS. (n.d.). Retrieved November 06, 2020, from https://www.sportsbookreviewsonline.com/scoresoddsarchives/nba/nbaoddsarchives.htm
+SPORTSBOOK REVIEWS. (n.d.). Retrieved November 06, 2020, from [https://www.sportsbookreviewsonline.com/scoresoddsarchives/nba/nbaoddsarchives.htm](https://www.sportsbookreviewsonline.com/scoresoddsarchives/nba/nbaoddsarchives.htm).
 
 
 
