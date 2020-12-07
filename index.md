@@ -8,7 +8,7 @@ A couple of our team members are fans of the NBA and are interested in the idea 
 
 We would like to find a way to correctly predict the outcome of NBA games, and specifically we would like to create a model that will determine the odds of a team beating the betting spread on those games. More broadly we would also like to look into finding ways to group good teams and bad ones using their statistical seasonal averages.
 
-### Data Collection
+## Data Collection
 
 There are three sources we got our data for this project from. The first is basketball reference which will give us the seasonal statistics of each team per 100 possessions. The reason the per 100 possessions is important is because it factors out the pace that a team plays at which can skew a teams per game averages. Some factors in this dataset include field goal percentage, 3 point percentage, assists, turnovers, points, etc. We also include the data on the opponents per 100 possession stats with the same factors that are included in the teams per 100 stats. The reason we decided to include this is because the statistics involving defense are not sufficient enough to capture how good a teams defense is so including the rates against opponents should fill this gap a bit. Finally we have some advanced statistical data that is usually derived from the other factors in some way. These include things like offensive efficiency, true shooting percentage, effective field goal percentage, etc. As for data cleaning we ended up normalizing all of the teams seasonal statistics per season. 
 
@@ -16,29 +16,29 @@ The second source we use is GoldSheet which has per game plus minus odds going b
 
 For the feature selection, since this is the midterm report and we have not quite finished tinkering with what works well with our project we ended up using most of the factors from the first source mentioned in our unsupervised learning model. Some factors that are included in our data sets that we don’t think we will need are games played, minutes played, stadium, age of players, and similar data that doesn’t have much to do with on the court performance. We also tried different groupings of the factors with our unsupervised model. When we get to our supervised learning we will need to think more about the data we include because some of the factors are not independent, for example field goal percentage and true shooting percentage are not independent of one another.
 
-### Methods
+## Methods
 
-## Unsupervised learning:
+### Unsupervised learning:
 
 For unsupervised learning, we would want to cluster the teams or players that are likely to perform better and win similar to this article [James]. For this we would like to use GMM, as it will provide probability for each team, which is likely to go to playoffs or likely to perform better. We could also use K-means for unsupervised learning. But as K-means is a hard classifier, it might not be helpful while placing bets or looking for odds. Also, we would like to use hierarchical clustering to observe which teams and players come under an umbrella and how the model performs differently than K-means.
 
 For our initial GMM studies, we looked at a group of traditional basketball statistics including field goals, three pointers, two pointers, free throws, rebounds, assists, steals, blocks, turnovers, fouls, and points.  We first tried considering each season’s stats for each team as a datapoint and clustering the teams from all seasons.  Then we looked at isolated seasons and only clustered the teams within that season.  After clustering the teams, we calculated the average wins for each cluster as a rough indicator of the predictive power of our clusters.
 
-## Supervised Learning:
+### Supervised Learning:
 
 We noticed that Neural Networks is the most commonly used algorithm for sports betting and we would like to go in the same direction as was used in this article [Hubáček & Sourek & Železný]. As NN is the last topic in the class course, we want to explore other methods in the meantime. As our problem statement revolves around the odds or probability of a team winning (classification type), we would like to use SVM, Logistic Regression, or Naive Bayes approaches. Out of these approaches, we would like to use Logistic Regression as it will use the probability or Odds while classifying the output. Also, Naive Bayes approaches uses the probability of a team winning under the circumstances of events (x1, x2, x3...). So, we would like to use these two methods and compare the outputs. SVM is a hard classifier, so it might be very helpful for our case.
 
-## Supervised Learning Results:
+### Supervised Learning Results:
 
-## Neural Networks Model 
+### Neural Networks Model 
 
 The first approach we used is Residual Neural Networks. We trained the model on 171 features, for home and away teams, to predict the result as yes if it meets points spread and no if it doesn’t meet the points spread. 
 
-# Data Preparation: 
+### Data Preparation: 
 
 The data is randomly split into 70% for training and 30% for testing purposes. As our total data set has 21,133 data points, it resulted in 14793 data points for training purpose and 6340 points for testing purpose. 
 
-# Model: 
+#### Model: 
 
 We trained the model using a residual neural network model. Initially we used neurons as 32 and layers as 3. The result that we got is: 
 
@@ -65,15 +65,15 @@ We noticed that as the number of layers increase, the test accuracy increases, f
 But we noticed a different behavior for train accuracy and number of layers. With increase in number of layers, the training accuracy has decreased. We think the high accuracy at with less number of layers might be because of over-fitting. 
 
 
-## Supervised Learning – Random Forest Classifier
+### Supervised Learning – Random Forest Classifier
 
 One approach we tested for supervised learning was a random forest classifier model.  Given the input dataset, which contained 115 features of basketball statistics for the home and away teams, the model would attempt to predict a True/False value representing whether or not the home team would cover the betting point spread for the game. 
 
-# Data Preparation
+#### Data Preparation
 
 The full dataset was divided into a test set and an out-of-sample set by pulling 25% of the datapoints at random (without replacement) and setting them aside in a new dataset, to be used as an out-of-sample set.  The remaining 75% of the datapoints would be used to train the random forest model.  Since our original dataset contained 21,129 datapoints, this resulted in a train set of 15,847 datapoints and an out-of-sample test set of 5,282 datapoints. 
 
-# Training the Model
+#### Training the Model
 
 To start, a random forest classifier was fit to the in-sample test set, with 50 estimator trees and no other restrictions on fitting, i.e. the trees would continue splitting all the way to perfect purity, and all features were considered at every split.  Then, this model was used to predict the outcome of all datapoints in both the train set and the out-of-sample set.  As might be expected, this resulted in a tremendous in-sample accuracy (the accuracy is the fraction of correct predictions out of the total number of datapoints in the set).  However, the out-of-sample accuracy was no better than a random guess, which we would expect to yield 50% accuracy.  Clear signs of overfitting!
  
@@ -101,7 +101,7 @@ If we look at the 50 greatest feature importances given by the model, we get the
 
 We can see that the Net Rating for both the home and away teams (designated as “Home_NRtg” and “Away_NRtg”) rank high in importance, with the home team’s net rating being the most important feature in the model.  This conceptually makes sense because those stats are meant to be an overall estimate of a team’s point differential per 100 possessions, and point differential will be directly related to covering a spread.  The point spread itself also ranks high in importance, which indicates that the betting lines set by sports books may not be perfectly efficient, and a particularly high or low spread might be a useful predictor in the model. 
 
-# Application to Betting – Kelly Criterion
+#### Application to Betting – Kelly Criterion
 
 To use our random forest model for actually betting on games, we can utilize the Kelly Criterion.  The Kelly Criterion gives the optimal percentage of a bettor’s bankroll he or she should bet on each game, given the odds of success and the payout if successful.  The formula is as follows:
 
@@ -109,7 +109,7 @@ Where p is the chance of success, q is the chance of failure (which equals 1-p),
 
 Which indicates that we should bet about 8% of our bankroll on every game using this model.  However, a common practice is to use Half Kelly leverage, to build in a margin of safety in case our model does not perform exactly as expected in the real world.  So, an optimal strategy might be to bet 4% on each game.  For example, if we started with a balance of $10,000 and wanted to grow our money by betting on NBA point spreads, we would bet $400 on each game according to our model’s predictions, and update the value of our bet as our bankroll increases or decreases. 
 
-# Backtesting the Strategy
+#### Backtesting the Strategy
 
 We will test two strategies:
 
