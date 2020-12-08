@@ -1,6 +1,6 @@
 #### By: Alec Domotor, Kyle Lindteigen, Yogesh Raparia, Jaya Sai Veepuru
 
-# Introduction/Background
+## Introduction/Background
 
 A couple of our team members are fans of the NBA and are interested in the idea of sports analytics. We as a group also wanted to create something that could potentially financially benefit us and from the combination of those two came our idea to look into different ways of beating the betting odds for NBA games.
 
@@ -63,17 +63,17 @@ For both of these we wanted to look at the average number of wins in each cluste
 
 Next we used the same data and took means of these attributes for all the year for every team and repeated the same process for fitting and prediction. The reason we decided to do this was to see how teams compare over the years. We identified that the optimum number of clusters were 4 with this approach. With this approach as probably should have been expected the average number of wins per cluster was closer together around the mid 30s to low 40s. This just means that there were some notable teams that stayed consistently good over the years and some that did not.
 
-### Supervised Learning Results:
+## Supervised Learning Results:
 
 ### Neural Networks Model 
 
 The first approach we used is Residual Neural Networks. We trained the model on 171 features, for home and away teams, to predict the result as yes if it meets points spread and no if it doesn’t meet the points spread. 
 
-### Data Preparation: 
+#### Data Preparation: 
 
 The data is randomly split into 70% for training and 30% for testing purposes. As our total data set has 21,133 data points, it resulted in 14793 data points for training purpose and 6340 points for testing purpose. 
 
-#### Model: 
+##### Model: 
 
 We trained an initial model using a residual neural network method with 32 neurons and 3 layers in order to get a baseline for what the results would look like. The result that we got is: 
 
@@ -121,7 +121,7 @@ We noticed that as the number of layers increase, the test accuracy increases, f
 But we noticed a different behavior for train accuracy and number of layers. With increase in number of layers, the training accuracy has decreased. We think the high accuracy at with less number of layers might be because of over-fitting. 
 
 
-### Supervised Learning – Random Forest Classifier
+### Random Forest Classifier
 
 One approach we tested for supervised learning was a random forest classifier model.  Given the input dataset, which contained 115 features of basketball statistics for the home and away teams, the model would attempt to predict a True/False value representing whether or not the home team would cover the betting point spread for the game. 
 
@@ -191,7 +191,7 @@ If we look at the 50 greatest feature importances given by the model, we get the
 
 We can see that the Net Rating for both the home and away teams (designated as “Home_NRtg” and “Away_NRtg”) rank high in importance, with the home team’s net rating being the most important feature in the model.  This conceptually makes sense because those stats are meant to be an overall estimate of a team’s point differential per 100 possessions, and point differential will be directly related to covering a spread.  The point spread itself also ranks high in importance, which indicates that the betting lines set by sports books may not be perfectly efficient, and a particularly high or low spread might be a useful predictor in the model.
 
-#### Application to Betting – Kelly Criterion
+### Application to Betting – Kelly Criterion
 
 To use our random forest model for actually betting on games, we can utilize the Kelly Criterion.  The Kelly Criterion gives the optimal percentage of a bettor’s bankroll he or she should bet on each game, given the odds of success and the payout if successful.  The formula is as follows:
 
