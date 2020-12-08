@@ -140,7 +140,7 @@ This project has a number of potential difficulties the first of which would be 
 
 #### [Link to download project proposal video](https://raw.githubusercontent.com/kylelindteigen/CS7641_Project/gh-pages/ProjectProposalVid.mp4)
 
-#### [Link to download project final video](https://raw.githubusercontent.com/kylelindteigen/CS7641_Project/gh-pages/final_presentation.mp4)
+#### [Link to download project final video](https://raw.githubusercontent.com/kylelindteigen/CS7641_Project/gh-pages/final.mp4)
 
 ## References:
 
