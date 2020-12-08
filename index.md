@@ -226,7 +226,7 @@ Definitely a promising result!  The coin-flip strategy does not earn any money, 
 
 ## Discussion
 
-This project has a number of potential difficulties the first of which would be dealing with the data and the uncertain nature of sports betting as is talked about in the Charles Malafosse article. Sports are an area that is difficult to predict due to dealing with all of the variables that contribute to the success of a team and there are certain unpredictable aspects such as players getting injured. Not only is it hard to predict but the people creating these betting spreads usually use all the tools at their disposal to create even odds for both sides leaving it more difficult for us to predict one side or the other. Even with this all being the case this project could be very profitable for us should we succeed in creating a good model. 
+Going into the project there were a couple of concerns we knew about that would make this project difficult. The first was that sports are an uncertain field where the results usually have a lot of variance. This makes it difficult to predict the outcome of results down to the point which is what is required when trying to predict beating the spread. Not only that but the data we do have is not quite sufficient in understanding the totality about what makes a team win. There are a lot of other aspects that go into effecting the results of a game such as injuries, trades, hot streaks, etc. Not only is it difficult to do but the people who set the odds have a motivation to try and make the odds as close to 50/50 as possible so beating those odds proved difficult.
 
 ## Conclusions:
 
