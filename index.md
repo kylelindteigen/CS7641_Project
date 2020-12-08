@@ -140,6 +140,8 @@ This project has a number of potential difficulties the first of which would be 
 
 #### [Link to download project proposal video](https://raw.githubusercontent.com/kylelindteigen/CS7641_Project/gh-pages/ProjectProposalVid.mp4)
 
+#### [Link to download project final video](https://raw.githubusercontent.com/kylelindteigen/CS7641_Project/gh-pages/final presentation.mp4)
+
 ## References:
 
 Malafosse, Charles. “Machine Learning for Sports Betting: Not a Basic Classification Problem.” Medium, Towards Data Science, 11 Oct. 2019, [https://towardsdatascience.com/machine-learning-for-sports-betting-not-a-basic-classification-problem-b42ae4900782](https://towardsdatascience.com/machine-learning-for-sports-betting-not-a-basic-classification-problem-b42ae4900782). 
