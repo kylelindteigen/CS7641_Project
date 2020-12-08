@@ -56,21 +56,38 @@ The data is randomly split into 70% for training and 30% for testing purposes. A
 
 We trained the model using a residual neural network model. Initially we used neurons as 32 and layers as 3. The result that we got is: 
 
-<img src="ResNetAccuracy.jpg" align="center"/>
+<p align="center">
+ <img src="ResNetAccuracy.jpg"/>
+</p>
 
 Train and test accuracy seemed to be very close and we believe it is a good model. 
 
 The hyper parameters that we used for this model are number of neurons and number of layers. To find the best set of hyper parameters, we ran the entire model for different inputs of neurons ranging [16,32,48,64,80,96,112,128] and for each neuron, the layers ranging from 2 to 7. The best test accuracy we have found is for the set of hyperparameters – (Neuron, Layer) - (112,4). The complete results that we got for different sets of hyperparameters is shown below: 
- 
+
+<p align="center">
+ <img src="two.png"/>
+</p>
  
 Next, to find how the model has changed to different set of neurons and layers, we plotted the below graphs: 
 
 
 For each variable in Neuron, we took the average of that variable for all layers and its performance against training accuracy and test accuracy. 
- 
-From the above graph, we noticed that as number of neurons increased, the training accuracy has increased 
+
+<p align="center">
+ <img src="three.png"/>
+</p>
+
+From the above graph, we noticed that as number of neurons increased, the training accuracy has increased.
+
+<p align="center">
+ <img src="four.png"/>
+</p>
  
 But we noticed that with increase in number of neurons, the test accuracy has increased and decreased, forming a bell-shaped curve. The maximum test accuracy is when neurons are 64. 
+
+<p align="center">
+ <img src="five.png"/>
+</p>
 
 For each variable in Layers, we took the average of that variable for all Neurons and its performance against training accuracy and test accuracy. 
  
