@@ -83,7 +83,7 @@ We trained an initial model using a residual neural network method with 32 neuro
 
 Train and test accuracy for this model are fairly close which means it is unlikely to be overfitting. It is a little concerning that the true positive is a bit lower than false positive, we would like both the true values to be larger than the false ones.  
 
-Next we went on to test the different parameters for this model to see the effect it has on the train and test accuracy. To find the best set of parameters, we ran the entire model for different inputs of neurons ranging [16,32,48,64,80,96,112,128] and for each neuron, the layers ranging from 2 to 7. The best test accuracy we have found is for the set of hyperparameters – (Neuron, Layer) - (112,4). The complete results that we got for different sets of hyperparameters is shown below: 
+Next we went on to test the different parameters for this model to see the effect it has on the train and test accuracy. To find the best set of parameters, we ran the entire model for different inputs of neurons ranging [16,32,48,64,80,96,112,128] and for each neuron, the layers ranging from 2 to 7. The best test accuracy we have found is for the set of parameters – (Neuron, Layer) - (112,4). The complete results that we got for different sets of parameters is shown below: 
 
 <p align="center">
  <img src="two.png"/>
