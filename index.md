@@ -23,7 +23,7 @@ The second source we use is GoldSheet which has per game plus minus odds going b
  <img src="gs.png"/>
 </p>
 
-For the feature selection for the unsupervised learning we split it up between the miscellaneous and general stats to see what happened with each of thier clusterings. Then for the supervised learning we decided to leave the factors in because the methods that we were using generally deal with having a larger number of factors well. Also due to us having such a large amount of data we figured that the factor reduction would become less important and we wanted to not lose out on any information the factors could provide.
+For the feature selection for the unsupervised learning we split it up between the miscellaneous and general stats to see what happened with each of thier clusterings. Then for the supervised learning we decided to leave the factors in because the methods that we were using generally deal with having a larger number of factors well. Also due to us having such a large amount of data we figured that the factor reduction would become less important and we wanted to not lose out on any information the factors could provide. We also made sure to scale the data to be between 0 and 1 in order for the neural network to work best.
 
 ## Methods
 
@@ -37,7 +37,7 @@ For our initial GMM studies, we looked at a group of traditional basketball stat
 
 We noticed that Neural Networks is the most commonly used algorithm for sports betting and we would like to go in the same direction as was used in this article [Hubáček & Sourek & Železný]. We decided that Residual Neural Networks (ResNet) would be a good direction to go because it could offer us some flexibility with some factors and seems to be the top of the line neural network for this kind of data. We also ended up deciding that a Random Forest model would be effective because it could get the most influential factors and use them. Finally along with these we wanted to take a look at what sort of betting strategy we would take using our best accuracy from the two and compare that to just regularly betting.
 
-For our ResNet model we used python and the tensorflow libraries. We used the data that was mentioned in the data collection section and 
+For our ResNet model we used python and the tensorflow libraries. We used the data that was mentioned in the data collection section that had been scaled and cleaned up for our model. For this type of model a lot of different parameters needed to be considered such as number of neurons, layers, epochs, and activation function. We tested for most of these to see what gave us the best results. Next for our random forest model we just needed to use sklearn and the unscaled data. For this model we tested limiting the depth and number of classifiers for trees then ended up using what was found to be best.
 
 ## Unsupervised Learning Results
 
@@ -45,7 +45,17 @@ For our initial studies with GMM unsupervised learning, we looked at traditional
 
 When we isolated a single season and clustered the teams, we found that there were typically a few clusters with similar average wins, with one cluster standing out with significantly lower average wins. This could be a useful predictive metric for identifying teams we do not expect to perform well.  
 
-We then tried to do some unsupervised learning using the advanced statistics in our table. The first model we created with this data was a K-means. In order to identify the ideal number of clusters we used elbow method to identify a good number of clusters to use. We identified that the ideal number of clusters should be 6 using the elbow method and then fitted a model with using 6 clusters. We then used the same parameters to then get a GMM model. For both of these we wanted to look at the average number of wins in each cluster to see if teams are being grouped well. In both the K-means and GMM model we saw similar results where there is typically one cluster that had about 25 wins on average then 2 of them with about a 37 and 39 win average. The final three clusters had about a 45 to 55 win average. This tells us that we were somewhat successful in grouping the better teams together and the worse teams together. Also looking at the teams that were in the highest average win group we saw that a good portion were playoff teams which means that they were the better teams in that season which also lets us know the groupings worked. The results of the GMM clustering average wins can be seen below.
+We then tried to do some unsupervised learning using the advanced statistics in our table. The first model we created with this data was a K-means. In order to identify the ideal number of clusters we used elbow method to identify a good number of clusters to use. We identified that the ideal number of clusters should be 6 using the elbow method and then fitted a model with using 6 clusters. We then used the same method to then get similar results for the GMM model. Below is the K-means elbow graph and then the GMM elbow graph.
+
+<p align="center">
+ <img src="km.png"/>
+</p>
+
+<p align="center">
+ <img src="gmm.png"/>
+</p>
+
+For both of these we wanted to look at the average number of wins in each cluster to see if teams are being grouped well. In both the K-means and GMM model we saw similar results where there is typically one cluster that had about 25 wins on average then 2 of them with about a 37 and 39 win average. The final three clusters had about a 45 to 55 win average. This tells us that we were somewhat successful in grouping the better teams together and the worse teams together. Also looking at the teams that were in the highest average win group we saw that a good portion were playoff teams which means that they were the better teams in that season which also lets us know the groupings worked. The results of the GMM clustering average wins can be seen below.
 
 <p align="center">
  <img src="one.png"/>
