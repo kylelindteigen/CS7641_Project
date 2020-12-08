@@ -75,21 +75,21 @@ The data is randomly split into 70% for training and 30% for testing purposes. A
 
 #### Model: 
 
-We trained the model using a residual neural network model. Initially we used neurons as 32 and layers as 3. The result that we got is: 
+We trained an initial model using a residual neural network method with 32 neurons and 3 layers in order to get a baseline for what the results would look like. The result that we got is: 
 
 <p align="center">
  <img src="ResNetAccuracy.jpg"/>
 </p>
 
-Train and test accuracy seemed to be very close and we believe it is a good model. 
+Train and test accuracy for this model are fairly close which means it is unlikely to be overfitting. It is a little concerning that the true positive is a bit lower than false positive, we would like both the true values to be larger than the false ones.  
 
-The hyper parameters that we used for this model are number of neurons and number of layers. To find the best set of hyper parameters, we ran the entire model for different inputs of neurons ranging [16,32,48,64,80,96,112,128] and for each neuron, the layers ranging from 2 to 7. The best test accuracy we have found is for the set of hyperparameters – (Neuron, Layer) - (112,4). The complete results that we got for different sets of hyperparameters is shown below: 
+Next we went on to test the different parameters for this model to see the effect it has on the train and test accuracy. To find the best set of parameters, we ran the entire model for different inputs of neurons ranging [16,32,48,64,80,96,112,128] and for each neuron, the layers ranging from 2 to 7. The best test accuracy we have found is for the set of hyperparameters – (Neuron, Layer) - (112,4). The complete results that we got for different sets of hyperparameters is shown below: 
 
 <p align="center">
  <img src="two.png"/>
 </p>
  
-Next, to find how the model has changed to different set of neurons and layers, we plotted the below graphs: 
+From these models it is shown that our best test accuracy was 53.88% which is reasonablly good. The next step is to graph how the model has changed to different set of neurons and layers, we plotted the below graphs: 
 
 
 For each variable in Neuron, we took the average of that variable for all layers and its performance against training accuracy and test accuracy. 
@@ -119,7 +119,6 @@ We noticed that as the number of layers increase, the test accuracy increases, f
 </p>
 
 But we noticed a different behavior for train accuracy and number of layers. With increase in number of layers, the training accuracy has decreased. We think the high accuracy at with less number of layers might be because of over-fitting. 
-
 
 
 ### Supervised Learning – Random Forest Classifier
