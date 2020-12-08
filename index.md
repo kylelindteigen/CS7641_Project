@@ -53,7 +53,7 @@ The data is randomly split into 70% for training and 30% for testing purposes. A
 
 We trained the model using a residual neural network model. Initially we used neurons as 32 and layers as 3. The result that we got is: 
 
-<img src="ResNetAccuracy.jpg" class="center"/>
+<img src="ResNetAccuracy.jpg" align="center"/>
 
 Train and test accuracy seemed to be very close and we believe it is a good model. 
 
