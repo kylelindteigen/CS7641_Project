@@ -28,6 +28,17 @@ For our initial GMM studies, we looked at a group of traditional basketball stat
 
 We noticed that Neural Networks is the most commonly used algorithm for sports betting and we would like to go in the same direction as was used in this article [Hubáček & Sourek & Železný]. As NN is the last topic in the class course, we want to explore other methods in the meantime. As our problem statement revolves around the odds or probability of a team winning (classification type), we would like to use SVM, Logistic Regression, or Naive Bayes approaches. Out of these approaches, we would like to use Logistic Regression as it will use the probability or Odds while classifying the output. Also, Naive Bayes approaches uses the probability of a team winning under the circumstances of events (x1, x2, x3...). So, we would like to use these two methods and compare the outputs. SVM is a hard classifier, so it might be very helpful for our case.
 
+## Unsupervised Learning Results
+
+For our initial studies with GMM unsupervised learning, we looked at traditional basketball statistics for each team, including shots and shot percentages, points, rebounds, steals, turnovers, etc. If we considered each team for one season as a data point and clustered the teams, we found that more modern teams were placed in the same cluster and older teams were also grouped together in the same cluster, even though year was not a feature of the dataset. This indicates that trends in these statistics must be evolving over time, and we will need to look at each season individually in order to make meaningful predictions.  
+
+When we isolated a single season and clustered the teams, we found that there were typically a few clusters with similar average wins, with one cluster standing out with significantly lower average wins. This could be a useful predictive metric for identifying teams we do not expect to perform well.  
+
+We then tried to do some unsupervised learning using the advanced statistics in our table. The first model we created with this data was a K-means. In order to identify the ideal number of clusters we used elbow method to identify a good number of clusters to use. We identified that the ideal number of clusters should be 6 using the elbow method and then fitted a model with using 6 clusters. We then used the same parameters to then get a GMM model. For both of these we wanted to look at the average number of wins in each cluster to see if teams are being grouped well. In both the K-means and GMM model we saw similar results where there is typically one cluster that had about 25 wins on average then 2 of them with about a 37 and 39 win average. The final three clusters had about a 45 to 55 win average. This tells us that we were somewhat successful in grouping the better teams together and the worse teams together. Also looking at the teams that were in the highest average win group we saw that a good portion were playoff teams which means that they were the better teams in that season which also lets us know the groupings worked.
+
+Next we used the same data and took means of these attributes for all the year for every team and repeated the same process for fitting and prediction. The reason we decided to do this was to see how teams compare over the years. We identified that the optimum number of clusters were 4 with this approach. With this approach as probably should have been expected the average number of wins per cluster was closer together around the mid 30s to low 40s. This just means that there were some notable teams that stayed consistently good over the years and some that did not.
+
+For our midterm report we did not end up getting to our supervised learning model but that will be our focus for the rest of the semester.
 ### Supervised Learning Results:
 
 ### Neural Networks Model 
@@ -42,7 +53,7 @@ The data is randomly split into 70% for training and 30% for testing purposes. A
 
 We trained the model using a residual neural network model. Initially we used neurons as 32 and layers as 3. The result that we got is: 
 
-<img src="ResNetAccuracy.jpg" class="inline"/>
+<img src="ResNetAccuracy.jpg" class="center"/>
 
 Train and test accuracy seemed to be very close and we believe it is a good model. 
 
@@ -63,6 +74,7 @@ For each variable in Layers, we took the average of that variable for all Neuron
 We noticed that as the number of layers increase, the test accuracy increases, formed a peak shaped curve and then decreased. The maximum test accuracy we got is when layers are 4. 
  
 But we noticed a different behavior for train accuracy and number of layers. With increase in number of layers, the training accuracy has decreased. We think the high accuracy at with less number of layers might be because of over-fitting. 
+
 
 
 ### Supervised Learning – Random Forest Classifier
@@ -120,18 +132,6 @@ After running the backtest as described, we arrive at the following result:
 
 Definitely a promising result!  The coin-flip strategy does not earn any money, finishing the 500 games slightly in the red, at around $9,200.  However, our random forest strategy grows the bankroll to about $150,000!  Before we go out and open an account at our local sports book, however, we should note some limitations of this study.  Perhaps most importantly, our “out-of-sample” dataset became somewhat in-sample, because we already tested the model on it and knew that the accuracy would be around 54%.  Obviously, if you have 54% odds in a game of chance that pays out 1-to-1, you are going to make a lot of money.  Also, our dataset had some look-ahead bias because we used the current season’s stats to predict the outcome of games in that season.  Although all of the stats are normalized per 100 possessions, there may be some positive correlation where teams with better stats beat more point spreads that season, and vice versa.  Also, the strategy assumes you are only betting on one game at a time, so even if you bet on a game every day during a season, it would take several years to realize these kinds of returns.  Still, the model definitely shows some promise for future refinement and testing!
 
-
-## Results
-
-For our initial studies with GMM unsupervised learning, we looked at traditional basketball statistics for each team, including shots and shot percentages, points, rebounds, steals, turnovers, etc. If we considered each team for one season as a data point and clustered the teams, we found that more modern teams were placed in the same cluster and older teams were also grouped together in the same cluster, even though year was not a feature of the dataset. This indicates that trends in these statistics must be evolving over time, and we will need to look at each season individually in order to make meaningful predictions.  
-
-When we isolated a single season and clustered the teams, we found that there were typically a few clusters with similar average wins, with one cluster standing out with significantly lower average wins. This could be a useful predictive metric for identifying teams we do not expect to perform well.  
-
-We then tried to do some unsupervised learning using the advanced statistics in our table. The first model we created with this data was a K-means. In order to identify the ideal number of clusters we used elbow method to identify a good number of clusters to use. We identified that the ideal number of clusters should be 6 using the elbow method and then fitted a model with using 6 clusters. We then used the same parameters to then get a GMM model. For both of these we wanted to look at the average number of wins in each cluster to see if teams are being grouped well. In both the K-means and GMM model we saw similar results where there is typically one cluster that had about 25 wins on average then 2 of them with about a 37 and 39 win average. The final three clusters had about a 45 to 55 win average. This tells us that we were somewhat successful in grouping the better teams together and the worse teams together. Also looking at the teams that were in the highest average win group we saw that a good portion were playoff teams which means that they were the better teams in that season which also lets us know the groupings worked.
-
-Next we used the same data and took means of these attributes for all the year for every team and repeated the same process for fitting and prediction. The reason we decided to do this was to see how teams compare over the years. We identified that the optimum number of clusters were 4 with this approach. With this approach as probably should have been expected the average number of wins per cluster was closer together around the mid 30s to low 40s. This just means that there were some notable teams that stayed consistently good over the years and some that did not.
-
-For our midterm report we did not end up getting to our supervised learning model but that will be our focus for the rest of the semester.
 
 
 ## Discussion
