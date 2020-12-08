@@ -114,19 +114,19 @@ The full dataset was divided into a test set and an out-of-sample set by pulling
 To start, a random forest classifier was fit to the in-sample test set, with 50 estimator trees and no other restrictions on fitting, i.e. the trees would continue splitting all the way to perfect purity, and all features were considered at every split.  Then, this model was used to predict the outcome of all datapoints in both the train set and the out-of-sample set.  As might be expected, this resulted in a tremendous in-sample accuracy (the accuracy is the fraction of correct predictions out of the total number of datapoints in the set).  However, the out-of-sample accuracy was no better than a random guess, which we would expect to yield 50% accuracy.  Clear signs of overfitting!
 
 <p align="center">
- <img src="eight.png"/>
+ <img src="seven.png"/>
 </p>
 
 To combat over-fitting, we need to make the model more generalized.  One method to do this is to limit the depth of the trees in the random forest, so that they stop splitting at a maximum depth rather than splitting all the way to perfect purity.  Keeping the number of trees at 50, the max depth of each tree was varied between 1 and 20, with the following results:
 
 <p align="center">
- <img src="nine.png"/>
+ <img src="eight.png"/>
 </p>
 
 Clearly, the in-sample accuracy improves as the max depth of the trees increases, but the out-of-sample accuracy suffers when the max depth becomes too large.  If we zoom in on only the out-of-sample accuracy, we get the following plot:
 
 <p align="center">
- <img src="ten.png"/>
+ <img src="nine.png"/>
 </p>
 
 The out-of-sample accuracy seems to peak when the max depth is somewhere near the range of 3-7, then falls off as the max depth increases.  So, the random forest model was constrained to a max depth of 5.  At the peak, we are achieving accuracies of around 53%, so we are already doing better than a random guess!
@@ -134,7 +134,7 @@ The out-of-sample accuracy seems to peak when the max depth is somewhere near th
 We can also edit the number of trees in the random forest.  Holding the max depth at 5, the number of estimator trees was varied between 1 and 100, yielding the following result:
 
 <p align="center">
- <img src="eleven.png"/>
+ <img src="ten.png"/>
 </p>
 
 The number of estimator trees does not seem to have a significant impact on out-of-sample accuracy, although the peak might be somewhere between 50 and 80, from visual inspection.  For in-sample accuracy, we see that there is a dramatic improvement in accuracy up to about 40 trees, then the accuracy starts to level off.  Therefore, a n_estimators value of 60 seems appropriate moving forward.
@@ -142,7 +142,7 @@ The number of estimator trees does not seem to have a significant impact on out-
 We can also try varying the percentage of features used at each split in the trees to reduce over-fitting.  Holding the number of trees at 60 and the max depth of the trees at 5, the fraction of features used was varied between 5% and 100%.  The results are shown below:
 
 <p align="center">
- <img src="twelve.png"/>
+ <img src="eleven.png"/>
 </p>
 
 Again, varying the fraction of features used does not seem to have a dramatic effect on out-of-sample accuracy, but a subtle peak around 80% might exist.  Therefore, we will constrain our model to only using 80% of features at each split (the features are randomly selected without replacement at each split).
@@ -150,28 +150,40 @@ Again, varying the fraction of features used does not seem to have a dramatic ef
 Finally, another method to reduce over-fitting is to constrain the minimum number of samples contained in each leaf node of the trees.  This would eliminate splits which only isolate a few datapoints, which might be outliers and not very useful for a generalized model.  Keeping the number of trees at 60, the max depth at 5, and the max features at 80%, varying the min samples per leaf yields the following results:
 
 <p align="center">
- <img src="thirteen.png"/>
+ <img src="twelve.png"/>
 </p>
 
 Constraining the minimum samples per leaf seems to help somewhat for out-of-sample accuracy, peaking at around 350 min samples per leaf. 
 
 So, our final parameters for the random forest classifier are as follows: a forest of 60 trees, limited to a max depth per tree of 5 and a minimum of 350 samples per leaf node, using a random selection of 80% of the features at each split.  After fitting a model with these parameters and testing it both in and out of sample, we see that our in-sample accuracy is much worse than the original, unconstrained random forest model, but our out-of-sample accuracy is now above 54%, which is much better than a random guess.  Also, the in- and out-of-sample accuracies are much closer to each other, which is desirable.
 
-An example of one of the trees generated in the forest is shown here (make link to image).
+An example of one of the trees generated in the forest is shown here:
+
+<p align="center">
+ <img src="dt.png"/>
+</p>
 
 If we look at the 50 greatest feature importances given by the model, we get the following plot:
 
 <p align="center">
- <img src="fourteen.png"/>
+ <img src="thirteen.png"/>
 </p>
 
-We can see that the Net Rating for both the home and away teams (designated as “Home_NRtg” and “Away_NRtg”) rank high in importance, with the home team’s net rating being the most important feature in the model.  This conceptually makes sense because those stats are meant to be an overall estimate of a team’s point differential per 100 possessions, and point differential will be directly related to covering a spread.  The point spread itself also ranks high in importance, which indicates that the betting lines set by sports books may not be perfectly efficient, and a particularly high or low spread might be a useful predictor in the model. 
+We can see that the Net Rating for both the home and away teams (designated as “Home_NRtg” and “Away_NRtg”) rank high in importance, with the home team’s net rating being the most important feature in the model.  This conceptually makes sense because those stats are meant to be an overall estimate of a team’s point differential per 100 possessions, and point differential will be directly related to covering a spread.  The point spread itself also ranks high in importance, which indicates that the betting lines set by sports books may not be perfectly efficient, and a particularly high or low spread might be a useful predictor in the model.
 
 #### Application to Betting – Kelly Criterion
 
 To use our random forest model for actually betting on games, we can utilize the Kelly Criterion.  The Kelly Criterion gives the optimal percentage of a bettor’s bankroll he or she should bet on each game, given the odds of success and the payout if successful.  The formula is as follows:
 
+<p align="center">
+ <img src="fourteen.png"/>
+</p>
+
 Where p is the chance of success, q is the chance of failure (which equals 1-p), b is the payout if successful, and f* is the optimal fraction of bankroll to bet.  Given that our model was approximately 54% successful out-of-sample, and a successful bet will yield a 100% return on our bet, our optimal leverage is as follows:
+
+<p align="center">
+ <img src="fifteen.png"/>
+</p>
 
 Which indicates that we should bet about 8% of our bankroll on every game using this model.  However, a common practice is to use Half Kelly leverage, to build in a margin of safety in case our model does not perform exactly as expected in the real world.  So, an optimal strategy might be to bet 4% on each game.  For example, if we started with a balance of $10,000 and wanted to grow our money by betting on NBA point spreads, we would bet $400 on each game according to our model’s predictions, and update the value of our bet as our bankroll increases or decreases. 
 
@@ -182,11 +194,15 @@ We will test two strategies:
 1. Starting with $10,000, we will pull a game from the out-of-sample dataset at random and bet 4% of our bankroll on the predicted outcome from our random forest model.  If we are correct, our bankroll increases by the amount we wagered, and if we are incorrect, we lose our wager.  Continue picking games at random and updating the bankroll for 500 iterations.
 
 2. Starting with $10,000 we will pull a game from the out-of-sample dataset at random and bet 4% of our bankroll on a random True/False value (a coin flip).  If we are correct, our bankroll increases by the amount we wagered, and if we are incorrect, we lose our wager.  Continue picking games at random and updating the bankroll for 500 iterations.
+
 After running the backtest as described, we arrive at the following result:
 
+
+<p align="center">
+ <img src="sixteen.png"/>
+</p>
+
 Definitely a promising result!  The coin-flip strategy does not earn any money, finishing the 500 games slightly in the red, at around $9,200.  However, our random forest strategy grows the bankroll to about $150,000!  Before we go out and open an account at our local sports book, however, we should note some limitations of this study.  Perhaps most importantly, our “out-of-sample” dataset became somewhat in-sample, because we already tested the model on it and knew that the accuracy would be around 54%.  Obviously, if you have 54% odds in a game of chance that pays out 1-to-1, you are going to make a lot of money.  Also, our dataset had some look-ahead bias because we used the current season’s stats to predict the outcome of games in that season.  Although all of the stats are normalized per 100 possessions, there may be some positive correlation where teams with better stats beat more point spreads that season, and vice versa.  Also, the strategy assumes you are only betting on one game at a time, so even if you bet on a game every day during a season, it would take several years to realize these kinds of returns.  Still, the model definitely shows some promise for future refinement and testing!
-
-
 
 ## Discussion
 
