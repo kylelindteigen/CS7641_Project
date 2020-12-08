@@ -85,14 +85,18 @@ From the above graph, we noticed that as number of neurons increased, the traini
  
 But we noticed that with increase in number of neurons, the test accuracy has increased and decreased, forming a bell-shaped curve. The maximum test accuracy is when neurons are 64. 
 
+For each variable in Layers, we took the average of that variable for all Neurons and its performance against training accuracy and test accuracy. 
+
 <p align="center">
  <img src="five.png"/>
 </p>
-
-For each variable in Layers, we took the average of that variable for all Neurons and its performance against training accuracy and test accuracy. 
  
 We noticed that as the number of layers increase, the test accuracy increases, formed a peak shaped curve and then decreased. The maximum test accuracy we got is when layers are 4. 
- 
+
+<p align="center">
+ <img src="six.png"/>
+</p>
+
 But we noticed a different behavior for train accuracy and number of layers. With increase in number of layers, the training accuracy has decreased. We think the high accuracy at with less number of layers might be because of over-fitting. 
 
 
@@ -108,28 +112,58 @@ The full dataset was divided into a test set and an out-of-sample set by pulling
 #### Training the Model
 
 To start, a random forest classifier was fit to the in-sample test set, with 50 estimator trees and no other restrictions on fitting, i.e. the trees would continue splitting all the way to perfect purity, and all features were considered at every split.  Then, this model was used to predict the outcome of all datapoints in both the train set and the out-of-sample set.  As might be expected, this resulted in a tremendous in-sample accuracy (the accuracy is the fraction of correct predictions out of the total number of datapoints in the set).  However, the out-of-sample accuracy was no better than a random guess, which we would expect to yield 50% accuracy.  Clear signs of overfitting!
- 
+
+<p align="center">
+ <img src="eight.png"/>
+</p>
+
 To combat over-fitting, we need to make the model more generalized.  One method to do this is to limit the depth of the trees in the random forest, so that they stop splitting at a maximum depth rather than splitting all the way to perfect purity.  Keeping the number of trees at 50, the max depth of each tree was varied between 1 and 20, with the following results:
+
+<p align="center">
+ <img src="nine.png"/>
+</p>
 
 Clearly, the in-sample accuracy improves as the max depth of the trees increases, but the out-of-sample accuracy suffers when the max depth becomes too large.  If we zoom in on only the out-of-sample accuracy, we get the following plot:
 
+<p align="center">
+ <img src="ten.png"/>
+</p>
+
 The out-of-sample accuracy seems to peak when the max depth is somewhere near the range of 3-7, then falls off as the max depth increases.  So, the random forest model was constrained to a max depth of 5.  At the peak, we are achieving accuracies of around 53%, so we are already doing better than a random guess!
+
 We can also edit the number of trees in the random forest.  Holding the max depth at 5, the number of estimator trees was varied between 1 and 100, yielding the following result:
+
+<p align="center">
+ <img src="eleven.png"/>
+</p>
 
 The number of estimator trees does not seem to have a significant impact on out-of-sample accuracy, although the peak might be somewhere between 50 and 80, from visual inspection.  For in-sample accuracy, we see that there is a dramatic improvement in accuracy up to about 40 trees, then the accuracy starts to level off.  Therefore, a n_estimators value of 60 seems appropriate moving forward.
 
 We can also try varying the percentage of features used at each split in the trees to reduce over-fitting.  Holding the number of trees at 60 and the max depth of the trees at 5, the fraction of features used was varied between 5% and 100%.  The results are shown below:
 
+<p align="center">
+ <img src="twelve.png"/>
+</p>
+
 Again, varying the fraction of features used does not seem to have a dramatic effect on out-of-sample accuracy, but a subtle peak around 80% might exist.  Therefore, we will constrain our model to only using 80% of features at each split (the features are randomly selected without replacement at each split).
 
 Finally, another method to reduce over-fitting is to constrain the minimum number of samples contained in each leaf node of the trees.  This would eliminate splits which only isolate a few datapoints, which might be outliers and not very useful for a generalized model.  Keeping the number of trees at 60, the max depth at 5, and the max features at 80%, varying the min samples per leaf yields the following results:
 
+<p align="center">
+ <img src="thirteen.png"/>
+</p>
+
 Constraining the minimum samples per leaf seems to help somewhat for out-of-sample accuracy, peaking at around 350 min samples per leaf. 
+
 So, our final parameters for the random forest classifier are as follows: a forest of 60 trees, limited to a max depth per tree of 5 and a minimum of 350 samples per leaf node, using a random selection of 80% of the features at each split.  After fitting a model with these parameters and testing it both in and out of sample, we see that our in-sample accuracy is much worse than the original, unconstrained random forest model, but our out-of-sample accuracy is now above 54%, which is much better than a random guess.  Also, the in- and out-of-sample accuracies are much closer to each other, which is desirable.
 
 An example of one of the trees generated in the forest is shown here (make link to image).
 
 If we look at the 50 greatest feature importances given by the model, we get the following plot:
+
+<p align="center">
+ <img src="fourteen.png"/>
+</p>
 
 We can see that the Net Rating for both the home and away teams (designated as “Home_NRtg” and “Away_NRtg”) rank high in importance, with the home team’s net rating being the most important feature in the model.  This conceptually makes sense because those stats are meant to be an overall estimate of a team’s point differential per 100 possessions, and point differential will be directly related to covering a spread.  The point spread itself also ranks high in importance, which indicates that the betting lines set by sports books may not be perfectly efficient, and a particularly high or low spread might be a useful predictor in the model. 
 
